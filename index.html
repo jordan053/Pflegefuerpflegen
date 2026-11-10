@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PflegefuerPflegen – Dienstplan, Arbeitsschutz und Erholung</title>
-<meta name="description" content="PflegefuerPflegen: Die Leitung liest den Dienstplan ein und erhält den Baustein Arbeitszeit für die Gefährdungsbeurteilung. Pflegekräfte bekommen Hinweise zum nächsten Dienst.">
+<title>PflegefuerPflegen – Auswertung zum Ausfallkonzept aus dem Dienstplan</title>
+<meta name="description" content="PflegefuerPflegen wertet den geplanten und den gearbeiteten Dienstplan aus: Wer fängt Ausfälle auf, wie oft wird aus dem Frei geholt, welchen Pool-Anteil trägt jedes Haus. Für Träger mit Springer-Pool und Heime mit Ausfallkonzept.">
 <style>
 @font-face{font-family:Figtree;font-style:normal;font-weight:300 900;font-display:swap;src:url(assets/fonts/figtree-latin-wght-normal.woff2) format("woff2")}
 @font-face{font-family:Fraunces;font-style:normal;font-weight:600;font-display:swap;src:url(assets/fonts/fraunces-latin-600-normal.woff2) format("woff2")}
@@ -20,63 +20,70 @@ body{margin:0;background:#fff}
 .sec{padding:112px 0}
 .dark{background:#000;color:var(--snow)}
 .grey{background:var(--snow)}
-.warm{background:linear-gradient(170deg,#FFF7ED 0%,#FDEBD5 100%)}
 .eyebrow{display:inline-flex;align-items:center;gap:12px;margin:0 0 18px;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--sub)}
 .dark .eyebrow{color:rgba(245,245,247,.6)}
-.num{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:999px;background:rgba(79,70,229,.1);color:var(--acc);font-weight:800;font-size:15px;letter-spacing:0}
-.h1{margin:0;font-weight:800;font-size:clamp(46px,8vw,108px);line-height:.98;letter-spacing:-.045em}
+.h1{margin:0;font-weight:800;font-size:clamp(44px,7.4vw,100px);line-height:.98;letter-spacing:-.045em}
 .h2{margin:0;font-weight:800;font-size:clamp(34px,5vw,64px);line-height:1.02;letter-spacing:-.04em}
-.h3{margin:0;font-weight:800;font-size:clamp(26px,3vw,38px);line-height:1.08;letter-spacing:-.03em}
-.lead{margin:22px 0 0;font-size:clamp(18px,2vw,22px);line-height:1.55;color:var(--sub);max-width:720px}
+.h3{margin:0;font-weight:800;font-size:clamp(24px,2.6vw,32px);line-height:1.1;letter-spacing:-.03em}
+.h1,.h2,.h3{hyphens:manual;-webkit-hyphens:manual;overflow-wrap:break-word}
+a.zoom{display:block;cursor:zoom-in}
+.m-only{display:none}
+.nw{white-space:nowrap}
+.lead a{text-decoration:none}
+.lead{margin:22px 0 0;font-size:clamp(18px,2vw,22px);line-height:1.55;color:var(--sub);max-width:760px}
 .dark .lead{color:rgba(245,245,247,.68)}
 .grad{background:linear-gradient(90deg,#6366F1 0%,#A855F7 55%,#EC4899 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .btn{display:inline-flex;align-items:center;min-height:52px;padding:0 26px;border-radius:999px;font-weight:700;font-size:16px;text-decoration:none}
 .btn-w{background:#fff;color:var(--ink)!important}
 .btn-o{border:1px solid rgba(245,245,247,.35);color:var(--snow)!important}
 .btn-d{background:var(--ink);color:#fff!important}
+.btn-l{border:1px solid rgba(29,29,31,.2);color:var(--ink)!important}
 .shot{border-radius:22px;overflow:hidden;background:#fff;box-shadow:0 40px 100px rgba(30,27,75,.16),0 0 0 1px var(--line)}
 .shot img{display:block;width:100%;height:auto}
-.phone{width:min(100%,280px);border-radius:44px;background:#0A0A10;padding:9px;box-shadow:0 40px 90px rgba(0,0,0,.28)}
-.phone img{display:block;width:100%;height:auto;border-radius:36px}
-.concept{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:20px;align-items:center;margin-top:56px}
+.dark .shot{box-shadow:0 60px 140px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.12)}
+.pad{padding:22px 26px}
+.cap{margin:12px 0 0;font-size:14px;color:var(--sub);text-align:center}
+.dark .cap{color:rgba(245,245,247,.5)}
+.tag{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--acc)}
 .card{background:#fff;border-radius:28px;padding:34px;box-shadow:0 30px 80px rgba(30,27,75,.10),0 0 0 1px var(--line)}
 .card p{margin:12px 0 0;font-size:17px;line-height:1.55;color:var(--sub)}
-.arrow{font-size:34px;color:var(--acc);font-weight:800}
-.h1,.h2,.h3{hyphens:auto;-webkit-hyphens:auto;overflow-wrap:break-word}
-.tag{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
-.steps{display:grid;gap:96px;margin-top:80px}
-.step{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:center}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:48px}
+.step{display:grid;grid-template-columns:5fr 7fr;gap:56px;align-items:center;margin-top:88px}
 .step.rev{grid-template-columns:7fr 5fr}
 .step.rev .txt{order:2}
 .step .txt p{margin:16px 0 0;font-size:18px;line-height:1.6;color:var(--sub)}
 .pill{display:inline-block;margin-bottom:16px;padding:8px 16px;border-radius:999px;background:rgba(79,70,229,.1);color:var(--acc);font-weight:700;font-size:14px;letter-spacing:.04em}
-.chip{display:inline-block;margin-top:22px;padding:12px 20px;border-radius:999px;background:rgba(79,70,229,.08);color:var(--acc);font-weight:600;font-size:15px}
-.stat{background:#000;color:var(--snow);border-radius:28px;padding:48px 40px;text-align:center}
-.stat b{display:block;font-weight:800;font-size:clamp(80px,12vw,150px);letter-spacing:-.06em;line-height:.9}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:32px}
-.stats b{display:block;font-weight:800;font-size:clamp(40px,5vw,60px);letter-spacing:-.04em;line-height:1}
-.stats p{margin:10px 0 0;font-size:15px;line-height:1.5;color:rgba(245,245,247,.62)}
-.phones{display:flex;gap:24px;justify-content:center;align-items:flex-end;margin-top:64px}
-.phones .phone:nth-child(2){transform:translateY(-36px)}
 .words{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
 .words div{border-top:1px solid rgba(245,245,247,.18);padding-top:18px}
 .words b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em}
 .words span{display:block;margin-top:6px;font-size:15px;line-height:1.5;color:rgba(245,245,247,.6)}
-.ol{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin:48px 0 0;padding:0;list-style:none}
+.ol{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin:48px 0 0;padding:0;list-style:none}
 .ol li{border-top:2px solid var(--ink);padding-top:18px}
 .ol b{display:block;font-size:20px;font-weight:800;letter-spacing:-.02em}
 .ol span{display:block;margin-top:8px;font-size:16px;line-height:1.6;color:var(--sub)}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:48px}
+.why .card p{font-size:16px}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
 .two p{margin:14px 0 0;font-size:17px;line-height:1.65;color:var(--sub)}
+.note{margin:28px 0 0;font-size:16px;line-height:1.6;color:var(--sub)}
+.thumb{display:block;width:min(100%,300px);border-radius:14px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.5),0 0 0 1px rgba(255,255,255,.12);margin:0 auto}
+.thumb img{display:block;width:100%;height:auto}
+.contact{display:grid;grid-template-columns:7fr 5fr;gap:56px;align-items:center;text-align:left}
+@media (max-width:980px){.grid4{grid-template-columns:1fr 1fr}.why{grid-template-columns:1fr}}
 @media (max-width:900px){
  .sec{padding:80px 0}
- .concept{grid-template-columns:1fr}.arrow{transform:rotate(90deg);justify-self:center}
- .step,.step.rev{grid-template-columns:1fr;gap:32px}.step.rev .txt{order:0}
- .stats,.words{grid-template-columns:1fr 1fr}
- .ol,.two{grid-template-columns:1fr}
- .phones{gap:12px}.phones .phone{width:31%}.phones .phone{border-radius:24px;padding:5px}.phones .phone img{border-radius:20px}
+ .step,.step.rev{grid-template-columns:1fr;gap:28px;margin-top:64px}.step.rev .txt{order:0}
+ .words{grid-template-columns:1fr 1fr}
+ .ol,.two,.contact{grid-template-columns:1fr}
+ .pad{padding:12px 12px}
 }
-@media (max-width:520px){.stats,.words{grid-template-columns:1fr}.nav-l{display:none}}
+@media (max-width:560px){
+ .grid4,.words{grid-template-columns:1fr}.nav-l{display:none}.card{padding:26px}
+ .m-only{display:inline}
+ .brand span{font-size:17px!important}.brand{gap:8px!important}
+ .hbtn{min-height:38px!important;padding:0 14px!important;font-size:14px!important}.hbtn .l{display:none}
+}
+@media (max-width:380px){.hwrap{column-gap:12px!important}.brand span{font-size:15px!important}}
 </style>
 </head>
 <body>
@@ -84,18 +91,17 @@ body{margin:0;background:#fff}
 
   <!-- Kopf -->
   <header class="dark" style="border-bottom: 1px solid rgba(255,255,255,0.08)">
-    <div class="wrap" style="padding-top: 16px; padding-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
-      <a href="#start" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+    <div class="wrap hwrap" style="padding-top: 16px; padding-bottom: 16px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
+      <a class="brand" href="#start" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x="1" y="1" width="26" height="26" rx="8" stroke="#A5B4FC" stroke-width="2"/><path d="M8 15.5l4 4 8-10" stroke="#A5B4FC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <span style="font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 20px">PflegefuerPflegen</span>
       </a>
       <nav aria-label="Hauptmenü" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px; font-size: 15px">
-        <a class="nav-l" href="#vergleich" style="text-decoration: none; padding: 10px 0; color: rgba(245,245,247,0.7)">Vergleich</a>
-        <a class="nav-l" href="#idee" style="text-decoration: none; padding: 10px 0; color: rgba(245,245,247,0.7)">Idee</a>
-        <a class="nav-l" href="#leitung" style="text-decoration: none; padding: 10px 0; color: rgba(245,245,247,0.7)">Für Leitungen</a>
-        <a class="nav-l" href="#team" style="text-decoration: none; padding: 10px 0; color: rgba(245,245,247,0.7)">Für Pflegekräfte</a>
+        <a class="nav-l" href="#zeigt" style="text-decoration: none; padding: 10px 0; color: rgba(245,245,247,0.7)">Was es zeigt</a>
+        <a class="nav-l" href="#ablauf" style="text-decoration: none; padding: 10px 0; color: rgba(245,245,247,0.7)">Ablauf</a>
+        <a class="nav-l" href="#warum" style="text-decoration: none; padding: 10px 0; color: rgba(245,245,247,0.7)">Warum jetzt</a>
         <a class="nav-l" href="#vertrauen" style="text-decoration: none; padding: 10px 0; color: rgba(245,245,247,0.7)">Datenschutz</a>
-        <a class="btn btn-w" href="mailto:kontakt@pflegefuerpflegen.de?subject=Vorf%C3%BChrung%20PflegefuerPflegen" style="min-height: 42px; padding: 0 18px; font-size: 15px">Vorführung anfragen</a>
+        <a class="btn btn-w hbtn" href="assets/beispiel-bericht.pdf" target="_blank" rel="noopener" style="min-height: 42px; padding: 0 18px; font-size: 15px"><span class="l">Muster-</span>Bericht (PDF)</a>
       </nav>
     </div>
   </header>
@@ -104,196 +110,138 @@ body{margin:0;background:#fff}
   <section id="start" class="dark" style="position: relative; overflow: hidden">
     <div aria-hidden="true" style="position: absolute; left: 50%; top: 46%; width: 1500px; height: 1500px; margin: -750px 0 0 -750px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.34) 0%, rgba(99,102,241,0.08) 35%, rgba(99,102,241,0) 62%); pointer-events: none"></div>
     <div class="wrap" style="position: relative; padding-top: 96px; padding-bottom: 88px; text-align: center">
-      <p class="eyebrow" style="justify-content: center">Für Pflegeheime und ihre Träger</p>
-      <h1 class="h1">Ein Dienstplan.<br><span class="grad">Zwei Hilfen.</span></h1>
+      <p class="eyebrow" style="justify-content: center">Für Träger mit Springer-Pool und Heime mit Ausfallkonzept</p>
+      <h1 class="h1">Zeigen, was Ihr<br><span class="grad">Ausfallkonzept bewirkt.</span></h1>
       <p class="lead" style="margin-left: auto; margin-right: auto"><strong style="color: #F5F5F7">Ihr Dienstplanprogramm warnt beim Planen. PflegefuerPflegen zeigt, was danach passiert ist.</strong></p>
-      <p class="lead" style="margin: 14px auto 0">Die Leitung sieht geplant gegen gearbeitet und vorher gegen nachher, als Baustein Arbeitszeit für die Gefährdungsbeurteilung. Die Pflegekräfte bekommen Hinweise zum nächsten Dienst. Einzelangaben sieht die Leitung nie.</p>
-      <div style="margin: 48px auto 0; max-width: 1040px; border-radius: 24px; overflow: hidden; box-shadow: 0 60px 140px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.12)">
-        <video src="assets/pfp-intro.mp4" poster="assets/pfp-intro-poster.jpg" controls playsinline preload="metadata" style="display: block; width: 100%; aspect-ratio: 16 / 9; background: #000" aria-label="PflegefuerPflegen erklärt in 2 Minuten 20"></video>
+      <p class="lead" style="margin: 14px auto 0">Aus dem geplanten und dem gearbeiteten Dienstplan: Wer hat Ausfälle aufgefangen? Wie oft kam jemand aus dem Frei? Welches Haus trägt welchen Anteil am Pool? Mit Ausgangswert aus Ihren alten Plänen.</p>
+      <div class="shot pad" style="margin: 48px auto 0; max-width: 980px">
+        <a class="zoom" href="assets/muster-100-ausfaelle.png" target="_blank" rel="noopener"><img src="assets/muster-100-ausfaelle.png" width="1545" height="738" alt="Von 100 Ausfällen: im Vorjahr ohne Pool kam bei 36 jemand aus dem Frei und 43 blieben ohne Ersatz-Person; im Berichtsjahr fing der Pool 37 auf, 18 kamen aus dem Frei, 30 blieben ohne Ersatz-Person. Muster mit erfundenen Testdaten"></a>
       </div>
-      <p style="margin: 14px 0 0; font-size: 14px; color: rgba(245,245,247,0.5)">2 Minuten 20 · mit Musik</p>
+      <p class="cap">Aus dem Muster-Bericht mit erfundenen Testdaten: Träger mit drei Häusern, Vorjahr ohne Pool gegen Berichtsjahr mit Pool<span class="m-only"> · Tippen zum Vergrößern</span></p>
       <div style="margin-top: 36px; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px">
-        <a class="btn btn-w" href="mailto:kontakt@pflegefuerpflegen.de?subject=Vorf%C3%BChrung%20PflegefuerPflegen">20 Minuten Vorführung anfragen</a>
-        <a class="btn btn-o" href="assets/beispiel-bericht.pdf" target="_blank" rel="noopener">Beispiel-Bericht (PDF)</a>
+        <a class="btn btn-w" href="assets/beispiel-bericht.pdf" target="_blank" rel="noopener">Muster-Bericht ansehen (PDF)</a>
+        <a class="btn btn-o" href="mailto:kontakt@pflegefuerpflegen.de?subject=Frage%20zu%20PflegefuerPflegen">Frage stellen</a>
       </div>
-      <p style="margin: 16px 0 0; font-size: 14px; color: rgba(245,245,247,0.5)">Per Video oder am Telefon, mit Beispieldaten.</p>
+      <p style="margin: 16px 0 0; font-size: 14px; color: rgba(245,245,247,0.5)">Ohne Termin: Bericht lesen, Fragen per Mail. Ein Gespräch nur, wenn Sie es möchten.</p>
     </div>
   </section>
 
-  <!-- Vergleichen -->
-  <section id="vergleich" class="sec">
+  <!-- Was es zeigt -->
+  <section id="zeigt" class="sec">
     <div class="wrap">
-      <p class="eyebrow">Für Leitungen</p>
-      <h2 class="h2" style="max-width: 900px">Sehen, was nach dem Planen passiert ist.</h2>
-      <p class="lead">Lesen Sie zwei Dienstpläne ein: den geplanten und den gearbeiteten, oder einen von vorher und einen von nachher. Der Baustein zeigt, was sich im Alltag verändert hat. So sehen Sie auch, ob Ihr Ausfallkonzept wirkt, zum Beispiel ein Springerpool: Wird seltener aus dem Frei geholt? Gibt es weniger kurze Ruhezeiten?</p>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 48px">
+      <p class="eyebrow">Was es zeigt</p>
+      <h2 class="h2" style="max-width: 900px">Vier Antworten aus Ihren Dienstplänen.</h2>
+      <p class="lead">Der 2. Nachtrag zum Rahmenvertrag nennt Beispiele wie die Dienstplansicherheit, schreibt aber keine Kennzahlen vor. PflegefuerPflegen liefert die Zahlen, die sich aus Dienstplänen belegen lassen, mit offener Methode.</p>
+      <div class="grid4">
         <div class="card">
-          <div class="tag" style="color: var(--acc)">Geplant gegen gearbeitet</div>
-          <div class="h3" style="margin-top: 12px; font-size: 26px">Wie oft wurde anders gearbeitet als geplant?</div>
-          <p>Wie oft wurde an einem geplant freien Tag gearbeitet (Holen aus dem Frei), bei wie vielen Personen, in welcher Woche und welchem Bereich. Dazu: Kamen dadurch kurze Ruhezeiten dazu?</p>
+          <div class="tag">Ausfälle</div>
+          <div class="h3" style="margin-top: 12px; font-size: 24px">Wer fängt Ausfälle auf?</div>
+          <p>Je Haus: Pool, aus dem Frei, freiwilliger Tausch, anderes Haus, Personen außerhalb des Plans oder ohne Ersatz-Person.</p>
         </div>
         <div class="card">
-          <div class="tag" style="color: var(--acc)">Vorher gegen nachher</div>
-          <div class="h3" style="margin-top: 12px; font-size: 26px">Hat die Maßnahme gewirkt?</div>
-          <p>Zwei Zeiträume nebeneinander, je 100 Schichtwechsel gerechnet. Besser, schlechter oder gleich, für Ihre Wirksamkeitskontrolle nach § 3 ArbSchG.</p>
+          <div class="tag">Dienstplansicherheit</div>
+          <div class="h3" style="margin-top: 12px; font-size: 24px">Wie oft aus dem Frei?</div>
+          <p>Je 100 regulär geplante Dienste, im Verlauf und neben der rechnerischen Kempten-Zielgröße von 1.</p>
         </div>
         <div class="card">
-          <div class="tag" style="color: var(--acc)">Belastung im Team</div>
-          <div class="h3" style="margin-top: 12px; font-size: 26px">Trifft es wenige oder viele?</div>
-          <p>Auf wie viele Personen entfallen die kurzen Ruhezeiten? Wer kommt hochgerechnet auf 48 Nächte im Jahr, die Schwelle für Nachtarbeitnehmer? Nur Anzahlen, nie Namen.</p>
+          <div class="tag">Pool-Anteile</div>
+          <div class="h3" style="margin-top: 12px; font-size: 24px">Wer trägt welchen Anteil?</div>
+          <p>Pool-Stunden und Stellenanteile je Einrichtung für den Pflegesatzzeitraum.</p>
+        </div>
+        <div class="card">
+          <div class="tag">Bedarf</div>
+          <div class="h3" style="margin-top: 12px; font-size: 24px">Wie groß muss der Pool sein?</div>
+          <p>Aus 6 bis 12 Monaten alter Pläne, nach dem Vorgehen der Evaluation der Hochschule Kempten. Eine Rechnung, keine Prognose.</p>
         </div>
       </div>
-      <div class="shot" style="margin-top: 48px"><img src="assets/leitung-vergleich.jpg" alt="Vergleich geplant gegen gearbeitet: 11-mal an einem geplant freien Tag gearbeitet, bei 5 von 18 Personen, Verlauf je Woche, Beispieldaten"></div>
-      <p style="margin: 12px 0 0; font-size: 14px; color: var(--sub); text-align: center">Vergleich in der App, Beispieldaten einer erfundenen Station</p>
+
+      <div class="step">
+        <div class="txt">
+          <span class="pill">So wird gezählt</span>
+          <h3 class="h3">Jede Schicht: geplant gegen gearbeitet.</h3>
+          <p>Fällt ein geplanter Dienst aus, prüft die Auswertung, wer in derselben Schicht im Haus zusätzlich gearbeitet hat. Über das Jahr summiert ergibt das die Anteile je Haus. Jede Zählregel steht im Bericht.</p>
+        </div>
+        <div><div class="shot pad"><a class="zoom" href="assets/muster-beispieltag.png" target="_blank" rel="noopener"><img src="assets/muster-beispieltag.png" width="1545" height="546" loading="lazy" alt="Beispiel aus den Testdaten: Frühdienst mit 9 eingeplanten Pflegekräften, 3 fallen aus. Einen Ausfall fängt der Pool auf, für einen kommt jemand aus dem Frei, einer bleibt ohne Ersatz-Person"></a></div><p class="cap">Beispieltag aus den Testdaten<span class="m-only"> · Tippen zum Vergrößern</span></p></div>
+      </div>
+
+      <div class="step rev">
+        <div class="txt">
+          <span class="pill">Dienstplansicherheit</span>
+          <h3 class="h3">Bleiben freie Tage frei?</h3>
+          <p>Wie oft Mitarbeitende an einem freien Tag einspringen, je 100 geplante Dienste und im Verlauf. Ihre Maßnahmen stehen mit Datum im Bild. So sehen Sie, was sich danach verändert hat.</p>
+        </div>
+        <div><div class="shot pad"><a class="zoom" href="assets/muster-aus-dem-frei.png" target="_blank" rel="noopener"><img src="assets/muster-aus-dem-frei.png" width="1545" height="651" loading="lazy" alt="Verlauf der Einsätze aus dem Frei je 100 geplante Dienste über zwei Jahre, mit Maßnahmen als nummerierte Marken und der rechnerischen Kempten-Zielgröße von 1. Muster mit erfundenen Testdaten"></a></div><p class="cap">Verlauf über zwei Jahre, Muster mit erfundenen Testdaten<span class="m-only"> · Tippen zum Vergrößern</span></p></div>
+      </div>
+
+      <div class="step">
+        <div class="txt">
+          <span class="pill">Pool-Anteile</span>
+          <h3 class="h3">Welches Haus trägt welchen Anteil?</h3>
+          <p>Bei Springern über mehrere Häuser werden die tatsächlichen Stellenanteile des letzten Pflegesatzzeitraums rückblickend je Haus ermittelt (§ 5 des 2. Nachtrags). Die Tabelle zeigt diese Aufteilung, dazu den Anteil jedes Hauses an den Ausfällen.</p>
+        </div>
+        <div><div class="shot pad"><a class="zoom" href="assets/muster-pool-anteile.png" target="_blank" rel="noopener"><img src="assets/muster-pool-anteile.png" width="1545" height="378" loading="lazy" alt="Tabelle der Pool-Anteile je Einrichtung: Plätze, Pool-Einsätze, Pool-Stunden, Anteil, Stellenanteil und Anteil an allen Ausfällen. Muster mit erfundenen Testdaten"></a></div><p class="cap">Muster mit erfundenen Testdaten<span class="m-only"> · Tippen zum Vergrößern</span></p></div>
+      </div>
+
+      <div class="step rev">
+        <div class="txt">
+          <span class="pill">Bedarf</span>
+          <h3 class="h3">Wie viele Pool-Dienste je Tag?</h3>
+          <p>Aus Ihren alten Plänen: an wie vielen Tagen wie viele Dienste ausfielen, und mit wie vielen Pool-Diensten an 50, 75 oder 90 % der Tage alle Ausfälle gedeckt gewesen wären. Gemeinsamer Pool und jedes Haus für sich im Vergleich.</p>
+        </div>
+        <div><div class="shot pad"><a class="zoom" href="assets/muster-poolgroesse.png" target="_blank" rel="noopener"><img src="assets/muster-poolgroesse.png" width="1545" height="648" loading="lazy" alt="Verteilung der Ausfälle je Tag im Ausgangszeitraum mit Markierungen für 50, 75 und 90 Prozent der Tage und einer Tabelle, an wie vielen Tagen 1 bis 7 Pool-Dienste gereicht hätten. Muster mit erfundenen Testdaten"></a></div><p class="cap">Muster mit erfundenen Testdaten<span class="m-only"> · Tippen zum Vergrößern</span></p></div>
+      </div>
     </div>
   </section>
 
-  <!-- Idee -->
-  <section id="idee" class="sec grey">
+  <!-- Ablauf -->
+  <section id="ablauf" class="sec grey">
     <div class="wrap">
-      <p class="eyebrow">Die Idee</p>
-      <h2 class="h2">So hängt es zusammen.</h2>
-      <p class="lead">Beide Seiten arbeiten mit demselben Dienstplan. Jede bekommt daraus, was sie braucht.</p>
-      <div class="concept">
-        <div class="card">
-          <div class="tag" style="color: var(--acc)">Für die Leitung</div>
-          <div class="h3" style="margin-top: 12px; font-size: 30px">Baustein Arbeitszeit</div>
-          <p>für die Gefährdungsbeurteilung. Befunde, Quellen, Maßnahmen, PDF.</p>
-        </div>
-        <div class="arrow" aria-hidden="true">←</div>
-        <div class="card" style="text-align: center">
-          <svg width="120" height="96" viewBox="0 0 120 96" aria-hidden="true" style="margin-bottom: 14px"><g fill="rgba(79,70,229,0.14)"><rect x="1" y="1" width="16" height="20" rx="4"/><rect x="21" y="1" width="16" height="20" rx="4" fill="#4F46E5"/><rect x="41" y="1" width="16" height="20" rx="4"/><rect x="61" y="1" width="16" height="20" rx="4"/><rect x="81" y="1" width="16" height="20" rx="4" fill="#4F46E5"/><rect x="101" y="1" width="16" height="20" rx="4"/><rect x="1" y="25" width="16" height="20" rx="4"/><rect x="21" y="25" width="16" height="20" rx="4"/><rect x="41" y="25" width="16" height="20" rx="4" fill="#4F46E5"/><rect x="61" y="25" width="16" height="20" rx="4"/><rect x="81" y="25" width="16" height="20" rx="4"/><rect x="101" y="25" width="16" height="20" rx="4" fill="#4F46E5"/><rect x="1" y="49" width="16" height="20" rx="4" fill="#4F46E5"/><rect x="21" y="49" width="16" height="20" rx="4"/><rect x="41" y="49" width="16" height="20" rx="4"/><rect x="61" y="49" width="16" height="20" rx="4" fill="#4F46E5"/><rect x="81" y="49" width="16" height="20" rx="4"/><rect x="101" y="49" width="16" height="20" rx="4"/><rect x="1" y="73" width="16" height="20" rx="4"/><rect x="21" y="73" width="16" height="20" rx="4"/><rect x="41" y="73" width="16" height="20" rx="4"/><rect x="61" y="73" width="16" height="20" rx="4"/><rect x="81" y="73" width="16" height="20" rx="4" fill="#4F46E5"/><rect x="101" y="73" width="16" height="20" rx="4"/></g></svg>
-          <div class="h3" style="font-size: 30px">Ein Dienstplan</div>
-          <p>der Station</p>
-        </div>
-        <div class="arrow" aria-hidden="true">→</div>
-        <div class="card">
-          <div class="tag" style="color: var(--warm)">Für die Pflegekräfte</div>
-          <div class="h3" style="margin-top: 12px; font-size: 30px">Hinweise zum nächsten Dienst</div>
-          <p>Schlaf, Pausen, Essen. Freiwillig und nur für sie selbst.</p>
-        </div>
-      </div>
+      <p class="eyebrow">Ablauf</p>
+      <h2 class="h2">So läuft es.</h2>
+      <ol class="ol">
+        <li><b>Start: Ausgangswert</b><span>Sie lesen 6 bis 12 Monate alter Pläne ein, geplant und gearbeitet. Daraus entstehen der Ausgangswert je Haus und die Rechnung zur Poolgröße. Passt es in den ersten 4 Wochen nicht, erstatte ich den vollen Betrag.</span></li>
+        <li><b>Jeden Monat: ein Blatt</b><span>Je Haus Ausfälle, Pool und Einsätze aus dem Frei, mit Ampel nach den letzten drei Monaten. Dazu Fragen, die sich zu prüfen lohnen.</span></li>
+        <li><b>Einmal im Jahr: der Bericht</b><span>Für die Pflegesatzverhandlung: vorher gegen nachher, Pool-Anteile je Haus, Maßnahmen und Methode. Sie wählen, welche Teile Sie vorlegen.</span></li>
+      </ol>
+      <p class="note">Für Heime ohne Pool gilt derselbe Ablauf für ein Haus, als Ausgangswert für Ihr Ausfallkonzept. Wir starten mit den ersten Trägern im Januar 2027.</p>
     </div>
   </section>
 
-  <!-- Leitung -->
-  <section id="leitung" class="sec">
+  <!-- Warum jetzt -->
+  <section id="warum" class="sec">
     <div class="wrap">
-      <p class="eyebrow"><span class="num">1</span>Hilfe eins · Für Leitungen</p>
-      <h2 class="h2" style="max-width: 900px">Der Teil Arbeitszeit Ihrer Gefährdungsbeurteilung. Aus dem echten Dienstplan.</h2>
-      <p class="lead">Das Arbeitsschutzgesetz nennt die Arbeitszeit ausdrücklich als Quelle von Gefährdung (§ 5 ArbSchG) und verlangt Unterlagen zu Ergebnis, Maßnahmen und Überprüfung (§ 6 ArbSchG). Der Baustein liefert die Zahlen dafür und lässt Platz für Ihre Entscheidungen.</p>
-      <p class="lead" style="margin-top: 14px">Sie brauchen nur Ihren Dienstplan, Ihr Team muss nichts installieren.</p>
-
-      <div class="steps">
-        <div class="step">
-          <div class="txt">
-            <span class="pill">Schritt 1 von 4</span>
-            <h3 class="h3">Dienstplan einlesen.</h3>
-            <p>Excel oder CSV, so wie er ist: Liste oder Raster mit Kürzeln, mehrere Monate möglich. Gelesen im Browser, nichts wird hochgeladen.</p>
-            <span class="chip">Dienstplan.xlsx · 18 Personen · 503 Schichten</span>
-          </div>
-          <div class="stat">
-            <span style="font-size: 16px; color: rgba(245,245,247,0.6)">Sofort sichtbar</span>
-            <b style="margin-top: 14px">92 %</b>
-            <span style="display: block; margin-top: 16px; font-size: 18px; color: rgba(245,245,247,0.75)">der Schichtwechsel mit mindestens 11 Stunden Ruhe</span>
-            <span style="display: block; margin-top: 10px; font-size: 13px; color: rgba(245,245,247,0.4)">Beispieldaten einer erfundenen Station</span>
-          </div>
+      <p class="eyebrow">Warum jetzt</p>
+      <h2 class="h2" style="max-width: 900px">Wirkung zeigt sich nur im Vergleich mit vorher.</h2>
+      <div class="why">
+        <div class="card">
+          <div class="tag">Seit 1.3.2026</div>
+          <div class="h3" style="margin-top: 12px; font-size: 24px">Der 2. Nachtrag zum Rahmenvertrag</div>
+          <p>Maßnahmen der Organisationsentwicklung sollen dokumentiert und den Kostenträgern auf Anforderung vorgelegt werden (§ 2). Bei Springern über mehrere Häuser sind die Stellenanteile rückblickend je Einrichtung zu ermitteln (§ 5). Wird eine Sonderfunktionsstelle über die Personalobergrenzen hinaus refinanziert, ist in der nächsten Pflegesatzverhandlung zu prüfen, ob das Ausfallkonzept erfolgreich ist (§ 4).</p>
         </div>
-
-        <div class="step rev">
-          <div class="txt">
-            <span class="pill">Schritt 2 von 4</span>
-            <h3 class="h3">Erst was gut läuft. Dann, wo es eng wird.</h3>
-            <p>Der Bericht beginnt mit den Stärken Ihres Plans. Danach je Bereich und Kalenderwoche: Ruhezeiten unter 11, 10 und 8 Stunden, Ausgleich nach § 5 Abs. 2 ArbZG, Nacht vor Früh, Rückwärtswechsel, Nachtserien, lange Dienstfolgen. Nur als Gruppe ab fünf Personen.</p>
-          </div>
-          <div class="shot"><img src="assets/leitung-baustein.jpg" alt="Baustein Arbeitszeit: zuerst „Das läuft gut“, dann 92 % der Schichtwechsel mit mindestens 11 Stunden Ruhe und Prüfhinweise, Beispieldaten"></div>
+        <div class="card">
+          <div class="tag">Ausgangswert</div>
+          <div class="h3" style="margin-top: 12px; font-size: 24px">Alte Pläne gehen verloren.</div>
+          <p>Nach einem Wechsel des Dienstplanprogramms fehlen alte Pläne manchmal. Lesen Sie sie ein, solange es sie gibt. Dann haben Sie ein Vorher, mit dem sich jede spätere Veränderung vergleichen lässt.</p>
         </div>
-
-        <div class="step">
-          <div class="txt">
-            <span class="pill">Schritt 3 von 4</span>
-            <h3 class="h3">Jeder Befund mit Quelle.</h3>
-            <p>Mit Fundstelle im Gesetz und Vorschlägen aus der Arbeitswissenschaft. Prüfhinweise, keine Urteile: Ob eine Ausnahme nach Tarifvertrag oder AVR greift, bewertet Ihre Einrichtung.</p>
-          </div>
-          <div class="shot"><img src="assets/leitung-befunde.jpg" alt="Liste der Befunde mit Fundstellen und Vorschlägen, Beispieldaten"></div>
-        </div>
-
-        <div class="step rev">
-          <div class="txt">
-            <span class="pill">Schritt 4 von 4</span>
-            <h3 class="h3">Sie entscheiden. Als PDF.</h3>
-            <p>Handlungsbedarf, Maßnahme, Rolle, Frist, Beteiligung von Betriebsrat oder MAV, Wirksamkeit: direkt im Formular. Heraus kommt ein ausfüllbares PDF für Ihre Gefährdungsbeurteilung. Es ergänzt die übrige Beurteilung und ersetzt sie nicht.</p>
-            <a class="btn btn-d" href="assets/beispiel-bericht.pdf" target="_blank" rel="noopener" style="margin-top: 26px">Beispiel-Bericht ansehen</a>
-          </div>
-          <div class="shot"><img src="assets/leitung-formular.jpg" alt="Formular zu einem Befund: Handlungsbedarf, Beteiligung, Verantwortlich, Frist, Beispieldaten"></div>
+        <div class="card">
+          <div class="tag">Modellprojekt</div>
+          <div class="h3" style="margin-top: 12px; font-size: 24px">Vergleichsdaten fehlten.</div>
+          <p>In der Evaluation des bayerischen Modellprojekts zu Springerkonzepten gab es für die Zeit vor dem Projekt keine exakten Vergleichsdaten. Aus Dienstplänen lässt sich dieses Vorher nachträglich rechnen.</p>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Zahlen -->
-  <section class="dark" style="padding: 80px 0">
-    <div class="wrap stats">
-      <div><b>11 h</b><p>Ruhezeit, die § 5 ArbZG vorsieht. In der Pflege 10 h, mit Ausgleich.</p></div>
-      <div><b>§§ 5, 6</b><p>ArbSchG: Arbeitszeit ist zu beurteilen und zu dokumentieren.</p></div>
-      <div><b>ab 5</b><p>Personen je Gruppe. Darunter zeigt der Bericht nichts.</p></div>
-      <div><b>0</b><p>Dienstpläne hochgeladen. Alles wird im Browser gerechnet.</p></div>
-    </div>
-  </section>
-
-  <!-- Pflegekräfte -->
-  <section id="team" class="sec warm">
-    <div class="wrap" style="text-align: center">
-      <p class="eyebrow" style="justify-content: center"><span class="num" style="background: rgba(180,83,9,0.12); color: var(--warm)">2</span>Hilfe zwei · Für Pflegekräfte</p>
-      <h2 class="h2">Hilfe, die zum nächsten Dienst passt.</h2>
-      <p class="lead" style="margin-left: auto; margin-right: auto">Eigenen Plan eintragen dauert Sekunden. Die App zeigt, was gerade dran ist: Schlaf vor dem Frühdienst, Pausen im Nachtdienst, Essen zwischen zwei Diensten. Die Hinweise beruhen auf Studien zur Schichtarbeit, die Quellen stehen in der App.</p>
-      <div class="phones">
-        <div class="phone"><img src="assets/pflegekraft-plan.jpg" alt="Eigener Dienstplan in der App, Beispieldaten"></div>
-        <div class="phone"><img src="assets/pflegekraft-startseite.jpg" alt="Startseite der App mit nächstem Dienst und Schlafblock-Hinweis, Beispieldaten"></div>
-        <div class="phone"><img src="assets/pflegekraft-hinweise.jpg" alt="Hinweise im Tagesverlauf, Beispieldaten"></div>
-      </div>
-      <p style="margin: 40px 0 0; font-size: 17px; color: var(--sub)">Freiwillig · Die Leitung sieht keine Einzelangaben · Ergänzt die Dienstplangestaltung, ersetzt sie nicht</p>
     </div>
   </section>
 
   <!-- Vertrauen -->
   <section id="vertrauen" class="sec dark">
     <div class="wrap">
-      <h2 class="h2" style="max-width: 900px">Einzelangaben sieht <span class="grad">die Leitung nie.</span></h2>
-      <p class="lead">Der Dienstplan wird im Browser gelesen und nicht hochgeladen oder gespeichert. Was Pflegekräfte in der App eintragen, sieht die Leitung nie einzeln, und es geht an keine KI.</p>
+      <h2 class="h2" style="max-width: 900px">Die Dienstpläne bleiben<br><span class="grad">auf Ihrem Rechner.</span></h2>
+      <p class="lead">Die Dienstpläne werden im Browser gelesen, nicht hochgeladen und nicht gespeichert. Namen werden beim Einlesen durch Nummern ersetzt. Der Bericht zeigt nur Gruppen ab fünf Personen und keine Werte einzelner Personen.</p>
       <div class="words">
-        <div><b>Nichts hochgeladen.</b><span>Der Plan wird im Browser gelesen.</span></div>
-        <div><b>Gruppen ab 5.</b><span>Keine Namen im Bericht.</span></div>
-        <div><b>Prüfhinweise.</b><span>Keine Urteile. Die Einrichtung entscheidet.</span></div>
-        <div><b>Mit Quellen.</b><span>Jede Empfehlung nennt ihre Grundlage.</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Start -->
-  <section class="sec">
-    <div class="wrap">
-      <p class="eyebrow">Ablauf</p>
-      <h2 class="h2">So starten Sie.</h2>
-      <ol class="ol">
-        <li><b>20 Minuten ansehen</b><span>Per Video oder am Telefon, mit Beispieldaten.</span></li>
-        <li><b>Woche 0: Ausgangslage</b><span>Sie lesen die letzten 3 Monate ein. Das ist Ihr Vorher. Passt es in den ersten 4 Wochen nicht, erstatte ich den vollen Betrag.</span></li>
-        <li><b>Woche 3 und 5: Tendenz</b><span>Sie lesen den aktuellen Plan ein und sehen, ob sich etwas bewegt.</span></li>
-        <li><b>Woche 9: Fazit</b><span>Vorher gegen nachher, als PDF für Ihre Gefährdungsbeurteilung. Das ist zugleich Ihre Wirksamkeitskontrolle.</span></li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- Seminare -->
-  <section id="seminare" style="padding: 0 0 112px">
-    <div class="wrap">
-      <div class="grey" style="border-radius: 28px; padding: 44px 40px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between">
-        <div style="flex: 1 1 520px; min-width: 0">
-          <p class="eyebrow">Für Seminare</p>
-          <h3 class="h3">Praxisbaustein für Seminare von Betriebsrat, MAV und Personalrat.</h3>
-          <p style="margin: 14px 0 0; font-size: 17px; line-height: 1.6; color: var(--sub)">Teilnehmende rechnen den Dienstplan ihres Hauses selbst nach und bereiten den Teil Arbeitszeit der Gefährdungsbeurteilung vor, bei der das Gremium mitbestimmt.</p>
-        </div>
-        <a class="btn btn-d" href="mailto:kontakt@pflegefuerpflegen.de?subject=Praxisbaustein%20Seminar">Baustein anfragen</a>
+        <div><b>Nichts hochgeladen.</b><span>Gerechnet wird im Browser.</span></div>
+        <div><b>Gruppen ab 5.</b><span>Keine Namen, keine Einzelwerte.</span></div>
+        <div><b>Offene Methode.</b><span>Jede Zählregel steht im Bericht, auch für MAV und Betriebsrat.</span></div>
+        <div><b>Keine Urteile.</b><span>Die Einrichtung bewertet und entscheidet.</span></div>
       </div>
     </div>
   </section>
@@ -302,12 +250,12 @@ body{margin:0;background:#fff}
   <section class="grey" style="padding: 88px 0">
     <div class="wrap two">
       <div>
-        <h3 class="h3" style="font-size: 30px">Datenschutz</h3>
-        <p>Der Dienstplan wird im Browser gelesen und nicht hochgeladen oder gespeichert. Ausgewiesen werden nur Gruppen ab 5 Personen, ohne Namen. Was Pflegekräfte in der App eintragen, sieht die Leitung nie einzeln, und es geht an keine KI.</p>
+        <h3 class="h3" style="font-size: 30px">Was es nicht ist</h3>
+        <p>Kein Dienstplanprogramm und keine Einsatzsteuerung im Alltag. Keine Rechtsberatung und keine Bewertung, ob Arbeitszeiten zulässig waren. Die Auswertung zeigt Entwicklungen, keine Ursachen.</p>
       </div>
       <div>
-        <h3 class="h3" style="font-size: 30px">Was es nicht ist</h3>
-        <p>Keine Rechtsberatung und keine Bewertung, ob eine Ausnahme nach Tarifvertrag oder AVR greift. Kein Medizinprodukt. Der Baustein deckt den Bereich Arbeitszeit ab und ersetzt nicht die übrige Gefährdungsbeurteilung.</p>
+        <h3 class="h3" style="font-size: 30px">Was Sie wissen sollten</h3>
+        <p>Feste Kennzahlen oder eine Vorlage für den Nachweis gibt es nicht. Welche Unterlagen in der Pflegesatzverhandlung zählen, entscheidet sich im Einzelfall. Der Bericht liefert die Zahlen dafür, mit offener Methode.</p>
       </div>
     </div>
   </section>
@@ -315,16 +263,23 @@ body{margin:0;background:#fff}
   <!-- Kontakt -->
   <section id="kontakt" class="dark" style="position: relative; overflow: hidden; padding: 112px 0">
     <div aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 1200px; height: 1200px; margin: -600px 0 0 -600px; border-radius: 50%; background: radial-gradient(circle, rgba(99,102,241,0.30) 0%, rgba(99,102,241,0) 60%); pointer-events: none"></div>
-    <div class="wrap" style="position: relative; text-align: center">
-      <h2 class="h2">Sehen Sie es sich 20 Minuten an.</h2>
-      <p class="lead" style="margin-left: auto; margin-right: auto">Jordan Newton, Gründer · Köln<br>kontakt@pflegefuerpflegen.de · 01520 9461135</p>
-      <a class="btn btn-w" href="mailto:kontakt@pflegefuerpflegen.de?subject=Vorf%C3%BChrung%20PflegefuerPflegen" style="margin-top: 32px">Vorführung anfragen</a>
+    <div class="wrap contact" style="position: relative">
+      <div>
+        <h2 class="h2">Lesen Sie den Muster-Bericht.</h2>
+        <p class="lead">Zehn Seiten, erfundene Testdaten, ohne Anmeldung. Fragen beantworte ich per Mail.</p>
+        <p class="lead" style="margin-top: 14px">Jordan Newton, Gründer · Köln<br><a class="nw" href="mailto:kontakt@pflegefuerpflegen.de">kontakt@pflegefuerpflegen.de</a><br><a class="nw" href="tel:+4915209461135">01520 9461135</a></p>
+        <div style="margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px">
+          <a class="btn btn-w" href="assets/beispiel-bericht.pdf" target="_blank" rel="noopener">Muster-Bericht ansehen (PDF)</a>
+          <a class="btn btn-o" href="mailto:kontakt@pflegefuerpflegen.de?subject=Frage%20zu%20PflegefuerPflegen">Frage stellen</a>
+        </div>
+      </div>
+      <a class="thumb" href="assets/beispiel-bericht.pdf" target="_blank" rel="noopener" aria-label="Muster-Bericht öffnen (PDF)"><img src="assets/muster-bericht-seite1.jpg" width="952" height="1348" loading="lazy" alt="Erste Seite des Muster-Berichts: Auswertung zum Ausfallkonzept"></a>
     </div>
   </section>
 
   <footer style="background: #000; color: rgba(245,245,247,0.55); border-top: 1px solid rgba(255,255,255,0.08)">
     <div class="wrap" style="padding-top: 24px; padding-bottom: 24px; display: flex; flex-wrap: wrap; gap: 8px 24px; justify-content: space-between; font-size: 14px">
-      <span>© 2026 PflegefuerPflegen · Köln · Musik im Film: Kevin MacLeod (CC BY 4.0)</span>
+      <span>© 2026 PflegefuerPflegen · Köln</span>
       <span style="display: flex; gap: 20px"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutzerklärung</a></span>
     </div>
   </footer>
